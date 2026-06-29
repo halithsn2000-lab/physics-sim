@@ -22,3 +22,10 @@ input{
     color: gainsboro;
 
 }
+h1{
+    height: 200px;
+    width: 200px;
+    font-size: 25px;
+    background: #000;
+    color: aliceblue;
+}
