@@ -5,8 +5,7 @@ function clicked(){
 
     speed =Number(document.getElementById("iS").value);
     angle = Number(document.getElementById("angle").value);
-    acceleration = Number(document.getElementById("A").value);  
-    console.log(speed , angle , acceleration);
+    console.log(speed , angle , );
     const angleRad = angle * Math.PI / 180;
     let Vx = speed * Math.cos(angleRad);
     let Vy = speed * Math.sin(angleRad);
@@ -19,11 +18,16 @@ function clicked(){
         Vy = Vy + -9.81 * dt;
         X = X + Vx * dt;
         Y = Y + Vy * dt;
+        document.getElementById("dot").style.gridColumn = Math.round(X)  ; 
+        document.getElementById("dot").style.gridRow = 100 - Math.round(Y) ;
+        
 
-        if (Y > 0) {
+
+        if (Y >= 0) {
 
         document.getElementById("xx").innerHTML = Math.round(X);
         document.getElementById("yy").innerHTML = Math.round(Y);
+
         }
         if (Y === 0 || Y < 0) {
             clearInterval(timer);
@@ -35,7 +39,7 @@ function clicked(){
 
 
 
-},16);
+},160);
 
 
    
