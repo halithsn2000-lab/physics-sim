@@ -20,11 +20,14 @@ function clicked(){
         X = X + Vx * dt;
         Y = Y + Vy * dt;
 
+        if (Y > 0) {
+
         document.getElementById("xx").innerHTML = Math.round(X);
         document.getElementById("yy").innerHTML = Math.round(Y);
-
-        if (Math.round(Y) === 0) {
+        }
+        if (Y === 0 || Y < 0) {
             clearInterval(timer);
+            document.getElementById("yy").innerHTML = 0;
         }
 
 
