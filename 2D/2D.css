@@ -38,6 +38,5 @@ input{
 }
 #dot{
     background: black;
-    grid-column: 50%;
-    grid-row: 50%;
+
 }
