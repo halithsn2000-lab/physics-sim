@@ -1,10 +1,23 @@
+let timer;
+let ctx;
+let canvas;
+let X;
+let Y;
 let angle = 0;
 let speed = 0;
 let acceleration = 0;
+let Gy;
+let Vy;
+let Vx;
+let hight;
+let sin90;
+let dt;
+let angleRad;
+function draw(){
+canvas = document.getElementById('myCanvas');
 
-function clicked(){
-    const canvas = document.getElementById('myCanvas');
-    const ctx = canvas.getContext("2d");
+     ctx = canvas.getContext("2d");
+
      ctx.beginPath();
      ctx.moveTo(200 , 1)
      ctx.lineTo(200,600 );
@@ -25,36 +38,44 @@ function clicked(){
      ctx.moveTo(1 ,400);
      ctx.lineTo(800 , 400);
      ctx.stroke()
+};
+draw()
+
+
+
+
+function clicked(){
 
 
 
     speed =Number(document.getElementById("iS").value);
     angle = Number(document.getElementById("angle").value);
-    let hight = Number(document.getElementById("H").value);
+    hight = Number(document.getElementById("H").value);
     
     console.log(speed , angle , hight);
-    const angleRad = angle * Math.PI / 180;
-    let Vx = speed * Math.cos(angleRad);
-    let Vy = speed * Math.sin(angleRad);
-    let sin90 = Math.sin(90 * Math.PI / 180);
+     angleRad = angle * Math.PI / 180;
+     Vx = speed * Math.cos(angleRad);
+     Vy = speed * Math.sin(angleRad);
+     sin90 = Math.sin(90 * Math.PI / 180);
   
    
 
-    let X = 0;
+    X = 0;
 
-    let Y = hight;
-    let dt = 0.16
-    const timer = setInterval(() => {
+    Y = hight;
+    dt = 0.016
+    timer = setInterval(() => {
 
         Vx = Vx + acceleration * dt;
         Vy = Vy + -9.81 * dt;
         X = X + Vx * dt;
         Y = Y + Vy * dt;
+         Gy = 600 -  Y
         ctx.beginPath();
         ctx.fillStyle = "red";
         ctx.arc(X, Gy, 5, 0, Math.PI * 2);
         ctx.fill();
-        let Gy = 600 -  Y
+    
 
 
 
@@ -76,7 +97,18 @@ function clicked(){
 
 },16);
 
-
    
 }
+function reset(){
+    clearInterval(timer);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById("xx").innerHTML = 0;
+    document.getElementById("yy").innerHTML = 0;
+    document.getElementById("iS").value = NaN;
+    document.getElementById("H").value = NaN;
+    document.getElementById("angle").value = NaN;
 
+    X = 0;
+    Y = 0;
+    draw();
+}
