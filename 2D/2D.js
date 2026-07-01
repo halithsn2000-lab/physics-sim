@@ -20,6 +20,9 @@ let scaleX;
 let scaleY;
 let Ix;
 let Iy;
+let scale;
+
+
 function draw(){
 canvas = document.getElementById('myCanvas');
 
@@ -53,7 +56,7 @@ draw()
 
 function clicked(){
 
-        draw() 
+    draw() 
     clearInterval(timer);
     speed =Number(document.getElementById("iS").value);
     angle = Number(document.getElementById("angle").value);
@@ -65,26 +68,48 @@ function clicked(){
      Ix = speed * Math.cos(angleRad);
      Vy = speed * Math.sin(angleRad);
      Iy = speed * Math.sin(angleRad);
-     sin90 = Math.sin(90 * Math.PI / 180);
-  
-   
+     dt = 0.36
+     X = 0;
+
+     Y = hight + 1;
+    for(; Y > 0;){
+
+        Vx = Vx ;
+        Vy = Vy + -9.81 * dt;
+        X = X + Vx * dt;
+        Y = Y + Vy * dt;
+        Mx = X;
+                
+    };
 
     X = 0;
-
     Y = hight;
-    dt = 0.36
+          angleRad = angle * Math.PI / 180;
+     Vx = speed * Math.cos(angleRad);
+     Ix = speed * Math.cos(angleRad);
+     Vy = speed * Math.sin(angleRad);
+     Iy = speed * Math.sin(angleRad);
+    My = (speed * Math.sin(angleRad)) ** 2 / (2 * 9.81);
+    console.log(Mx , My);
+
+    screenX = 800 / (Mx + 50);
+    screenY = 600 / (My + hight + 50);
+    scale = Math.min(screenX, screenY);
+
+    
     timer = setInterval(() => {
+
 
         Vx = Vx + acceleration * dt;
         Vy = Vy + -9.81 * dt;
         X = X + Vx * dt;
         Y = Y + Vy * dt;
-         Gy = 600 -  Y
+         Gy = 600 - (Y * scale);
         
 
         ctx.beginPath();
         ctx.fillStyle = "red";
-        ctx.arc(X, Gy, 5, 0, Math.PI * 2);
+        ctx.arc(X * scale, Gy , 5 , 0, Math.PI * 2);
         ctx.fill();
     
 
@@ -116,9 +141,9 @@ function reset(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById("xx").innerHTML = 0;
     document.getElementById("yy").innerHTML = 0;
-    document.getElementById("iS").value = NaN;
-    document.getElementById("H").value = NaN;
-    document.getElementById("angle").value = NaN;
+    document.getElementById("iS").value = 0;
+    document.getElementById("H").value = 0;
+    document.getElementById("angle").value = 0;
 
     X = 0;
     Y = 0;
