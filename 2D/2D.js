@@ -15,13 +15,13 @@ let hight;
 let sin90;
 let dt;
 let angleRad;
-let trajectory = [ ]
+
 let scaleX;
 let scaleY;
 let Ix;
 let Iy;
-let scale;
-
+let scale = 20;
+let trajectories = [];
 
 function draw(){
 canvas = document.getElementById('myCanvas');
@@ -56,6 +56,8 @@ draw()
 
 function clicked(){
 
+
+    let trajectory = [];
     draw() 
     clearInterval(timer);
     speed =Number(document.getElementById("iS").value);
@@ -92,10 +94,12 @@ function clicked(){
     My = (speed * Math.sin(angleRad)) ** 2 / (2 * 9.81);
     console.log(Mx , My);
 
-    screenX = 800 / (Mx + 50);
-    screenY = 600 / (My + hight + 50);
-    scale = Math.min(screenX, screenY);
-
+    screenX = 800 / (Mx + 100);
+    screenY = 600 / (My + hight + 100);
+    let newscale = Math.min(screenX, screenY);
+    if (newscale < scale){
+        scale = newscale;
+    }
     
     timer = setInterval(() => {
 
@@ -104,7 +108,8 @@ function clicked(){
         Vy = Vy + -9.81 * dt;
         X = X + Vx * dt;
         Y = Y + Vy * dt;
-         Gy = 600 - (Y * scale);
+        Gy = 600 - (Y * scale);
+        trajectory.push({x: X , y: Y});
         
 
         ctx.beginPath();
@@ -122,6 +127,7 @@ function clicked(){
 
         }
         if (Y === 0 || Y < 0) {
+            trajectories.push(trajectory);
             clearInterval(timer);
             document.getElementById("yy").innerHTML = 0;
 
