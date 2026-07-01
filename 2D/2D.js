@@ -3,6 +3,8 @@ let ctx;
 let canvas;
 let X;
 let Y;
+let Mx;
+let My;
 let angle = 0;
 let speed = 0;
 let acceleration = 0;
@@ -13,6 +15,11 @@ let hight;
 let sin90;
 let dt;
 let angleRad;
+let trajectory = [ ]
+let scaleX;
+let scaleY;
+let Ix;
+let Iy;
 function draw(){
 canvas = document.getElementById('myCanvas');
 
@@ -46,8 +53,8 @@ draw()
 
 function clicked(){
 
-
-
+        draw() 
+    clearInterval(timer);
     speed =Number(document.getElementById("iS").value);
     angle = Number(document.getElementById("angle").value);
     hight = Number(document.getElementById("H").value);
@@ -55,7 +62,9 @@ function clicked(){
     console.log(speed , angle , hight);
      angleRad = angle * Math.PI / 180;
      Vx = speed * Math.cos(angleRad);
+     Ix = speed * Math.cos(angleRad);
      Vy = speed * Math.sin(angleRad);
+     Iy = speed * Math.sin(angleRad);
      sin90 = Math.sin(90 * Math.PI / 180);
   
    
@@ -63,7 +72,7 @@ function clicked(){
     X = 0;
 
     Y = hight;
-    dt = 0.016
+    dt = 0.36
     timer = setInterval(() => {
 
         Vx = Vx + acceleration * dt;
@@ -71,6 +80,8 @@ function clicked(){
         X = X + Vx * dt;
         Y = Y + Vy * dt;
          Gy = 600 -  Y
+        
+
         ctx.beginPath();
         ctx.fillStyle = "red";
         ctx.arc(X, Gy, 5, 0, Math.PI * 2);
@@ -88,6 +99,7 @@ function clicked(){
         if (Y === 0 || Y < 0) {
             clearInterval(timer);
             document.getElementById("yy").innerHTML = 0;
+
         }
 
 
@@ -95,7 +107,7 @@ function clicked(){
 
 
 
-},16);
+},160);
 
    
 }
