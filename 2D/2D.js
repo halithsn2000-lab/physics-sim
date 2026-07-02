@@ -171,7 +171,7 @@ function clicked(){
      Ix = speed * Math.cos(angleRad);
      Vy = speed * Math.sin(angleRad);
      Iy = speed * Math.sin(angleRad);
-     dt = 0.36
+     dt = 0.16
     Y = hight;
 
     // deviding the forces into the x and y axes
@@ -182,7 +182,7 @@ function clicked(){
     
     timer = setInterval(() => {
     time = time  + 160/1000;
-    document.getElementById("time").innerHTML =Math.round(time / 0.25) * 0.25 + "s";
+    document.getElementById("time").innerHTML = "Time : " + Math.round(time / 0.25) * 0.25 + "s";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     draw();
         Vx = Vx + acceleration * dt;
@@ -200,8 +200,8 @@ function clicked(){
          maxY = Math.max(maxY, Y);
 
            scale = Math.min(
-           canvas.width / (maxX + 100),
-           canvas.height / (maxY + 100)
+           canvas.width / (maxX + 10),
+           canvas.height / (maxY + 10)
            );
 
 
@@ -230,16 +230,16 @@ function clicked(){
 
         if (Y >= 0) {
 
-        document.getElementById("xx").innerHTML = Math.round(X);
-        document.getElementById("yy").innerHTML = Math.round(Y);
+        document.getElementById("xx").innerHTML = "X : " + Math.round(X) + "m";
+        document.getElementById("yy").innerHTML = "Y : " + Math.round(Y) + "m";
 
         }
         // displaying the values of x and y on the screen live
         if (Y === 0 || Y < 0) {
             
             clearInterval(timer);
-            document.getElementById("yy").innerHTML = 0;
-            document.getElementById("maxY").innerHTML = Math.round(maxY) + "m";
+            document.getElementById("yy").innerHTML = "Y : 0m";
+            document.getElementById("maxY").innerHTML = "Max Y : " + Math.round(maxY) + "m";
 
             // stopping the simulation when the projectile hits the ground
 
@@ -258,8 +258,10 @@ function reset(){
     document.getElementById("time").innerHTML = 0 + "s";
     clearInterval(timer);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById("xx").innerHTML = 0;
-    document.getElementById("yy").innerHTML = 0;
+    document.getElementById("xx").innerHTML = "X : 0m";
+    document.getElementById("yy").innerHTML = "Y : 0m";
+    document.getElementById("time").innerHTML = "Time : 0s";
+    document.getElementById("maxY").innerHTML = "Max Y : 0m";
     document.getElementById("iS").value = 0;
     document.getElementById("H").value = 0;
     document.getElementById("angle").value = 0;
@@ -269,6 +271,9 @@ function reset(){
     X = 0;
     Y = 0;
     time = 0;
+    maxX = 0;
+    maxY = 0;
+    Vx = 0;
     draw();
 }
 
