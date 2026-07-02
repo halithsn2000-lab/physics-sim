@@ -1,38 +1,42 @@
 body{
     height: 100vh;
-    width: 100%;
     background-color: aquamarine;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 25% 25% 25% 25%;
-}
-input{
-    height: 50px;
-    width: 350px;
-    border-radius: 5px;
-    border-color: beige;
-    text-align: center;
-    
-    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
 }
 ::placeholder{
     color: gainsboro;
 
 }
-
-#inputs{
-    display: flex;
-    align-items: center;
-  
-    grid-column: 1 / 5;
-    grid-row: 4 / 5;
-    justify-content: space-evenly;
-}
-#dot{
-    background: black;
-
-}
 canvas{
+    grid-area:2/2;
     border: 2mm solid black;
+    margin: 50px;
 
+}
+#container{
+    display: flex;
+    background-color: rgb(0, 0, 0, 0.5);
+    flex-direction: column;
+    padding: 5%;
+    gap: 9%;
+}
+#output{
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+}
+#inputs{
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+    margin-right: 20%;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
 }

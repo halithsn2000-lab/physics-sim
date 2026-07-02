@@ -15,7 +15,7 @@ let hight;
 let sin90;
 let dt;
 let angleRad;
-
+let time;
 let scaleX;
 let scaleY;
 let Ix;
@@ -33,6 +33,11 @@ function draw(){
 canvas = document.getElementById('myCanvas');
 
      ctx = canvas.getContext("2d");
+    
+
+
+
+
      ctx.beginPath();
      ctx.moveTo(100 , 1)
      ctx.lineTo(100,600 );
@@ -153,7 +158,7 @@ draw()
 
 
 function clicked(){
-    
+    time = 0;
     X = 0;
     draw() 
     clearInterval(timer);
@@ -176,7 +181,8 @@ function clicked(){
 
     
     timer = setInterval(() => {
-
+    time = time  + 160/1000;
+    document.getElementById("time").innerHTML =Math.round(time / 0.25) * 0.25 + "s";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     draw();
         Vx = Vx + acceleration * dt;
@@ -233,6 +239,7 @@ function clicked(){
             
             clearInterval(timer);
             document.getElementById("yy").innerHTML = 0;
+            document.getElementById("maxY").innerHTML = Math.round(maxY) + "m";
 
             // stopping the simulation when the projectile hits the ground
 
@@ -247,6 +254,8 @@ function clicked(){
 }
 
 function reset(){
+    time = 0;
+    document.getElementById("time").innerHTML = 0 + "s";
     clearInterval(timer);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById("xx").innerHTML = 0;
@@ -259,6 +268,7 @@ function reset(){
     scale = 1;
     X = 0;
     Y = 0;
+    time = 0;
     draw();
 }
 
