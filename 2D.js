@@ -1,3 +1,6 @@
+alert("pc only , mobile not supported yet , dont set the angle higher than 90 degrees , to get the best experience dont set speed lower than 10m/s ");
+
+
 let timer;
 let ctx;
 let canvas;
